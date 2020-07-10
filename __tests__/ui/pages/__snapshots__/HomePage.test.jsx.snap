@@ -266,6 +266,16 @@ Array [
                       TP53:p.Arg175His
                     </span>
                   </div>
+                  <div>
+                    <span>
+                      dbSNP HGVS:
+                    </span>
+                    <span
+                      className="variant-example"
+                    >
+                      NM_145255.3:c.526C&gt;T
+                    </span>
+                  </div>
                 </div>
                 <form
                   onSubmit={[Function]}
@@ -278,7 +288,9 @@ Array [
 20 58909365 58909365 C/A . . .
 3 165830358 165830358 T/C . . .
 21 43072000 43072000 T/C . . .
-21 43060540 43060540 C/T . . ."
+21 43060540 43060540 C/T . . .
+22 19479862 19479862 G/C . . .
+22 19494512 19494512 C/G . . ."
                   />
                   <span
                     className="assemly-ref-note"

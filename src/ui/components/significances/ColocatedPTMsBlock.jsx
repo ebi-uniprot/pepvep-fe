@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v1 as uuidv1 } from 'uuid';
 
 import SignificancesColumn from './SignificancesColumn';
 import ColocatedFeatureDataBlock from './ColocatedFeatureDataBlock';
@@ -15,7 +16,7 @@ const ColocatedPTMsBlock = (props) => {
     >
       {data
         .filter(feature => feature.category === 'PTM')
-        .map(f => <ColocatedFeatureDataBlock data={f} />)
+        .map(f => <ColocatedFeatureDataBlock key={uuidv1()} data={f} />)
       }
     </SignificancesColumn>
   );

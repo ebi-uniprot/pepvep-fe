@@ -113,6 +113,14 @@
       min-height: 150px;
     }
 
+    .significances-stacked-columns {
+      flex-direction: column;
+
+      .significances-column {
+        min-height: auto;
+      }
+    }
+
     .structural-icon {
       font-size: 2rem;
     }
@@ -174,14 +182,6 @@
       font-size: 1rem;
       margin-right: .7rem;
     }
-  }
-
-  .results-counter {
-    font-weight: 700;
-    width: 100%;
-    display: block;
-    margin-bottom: 4rem;
-    font-size: 2.5rem;
   }
 
   .results-and-counter {

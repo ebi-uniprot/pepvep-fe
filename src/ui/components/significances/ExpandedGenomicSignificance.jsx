@@ -3,10 +3,22 @@ import PropTypes from 'prop-types';
 
 import PopulationFrequencyBlock from './PopulationFrequencyBlock';
 import ConsequencePredictionBlock from './ConsequencePredictionBlock';
-import VariantIDsBlock from './VariantIDsBlock';
+import VariantDetailsBlock from './VariantDetailsBlock';
+import {
+  detailsLinkPropTypes,
+  detailsLinkDefaultProps,
+  variationIDsPropTypes,
+  variationPropTypes,
+  variationDefaultProps,
+} from '../../other/sharedProps';
 
 const ExpandedGenomicSignificance = (props) => {
-  const { data, detailsLink } = props;
+  const {
+    data,
+    variation,
+    detailsLink,
+    gene,
+  } = props;
 
   return (
     <tr>
@@ -16,13 +28,17 @@ const ExpandedGenomicSignificance = (props) => {
 
         <div
           className="significances-groups"
-          key={`genomic-significances-group-wrapper`}
+          key="genomic-significances-group-wrapper"
         >
           <PopulationFrequencyBlock data={data.populationFrequencies} />
 
           <ConsequencePredictionBlock data={data.consequencePrediction} />
 
-          <VariantIDsBlock data={data.variationDetails.ids} />
+          <VariantDetailsBlock
+            data={data}
+            variation={variation}
+            gene={gene}
+          />
         </div>
       </td>
     </tr>
@@ -30,23 +46,23 @@ const ExpandedGenomicSignificance = (props) => {
 };
 
 ExpandedGenomicSignificance.propTypes = {
-  detailsLink: PropTypes.element.isRequired,
+  detailsLink: detailsLinkPropTypes,
   data: PropTypes.shape({
     populationFrequencies: PropTypes.shape({}),
     consequencePrediction: PropTypes.shape({}),
-    variationDetails: PropTypes.shape({
-      ids: PropTypes.shape({
-        clinVarIDs: PropTypes.arrayOf(PropTypes.shape({})),
-        cosmicId: PropTypes.string,
-        dbSNPId: PropTypes.string,
-        rsId: PropTypes.string,
-      }),
-    }),
+    variationDetails: variationIDsPropTypes,
+  }),
+  variation: variationPropTypes,
+  gene: PropTypes.shape({
+    ensgId: PropTypes.string,
   }),
 };
 
 ExpandedGenomicSignificance.defaultProps = {
   data: {},
+  variation: variationDefaultProps,
+  detailsLink: detailsLinkDefaultProps,
+  gene: {},
 };
 
 export default ExpandedGenomicSignificance;

@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ProtvistaStructure from 'protvista-structure';
 
 import StructuralPosition from '../other/StructuralPosition';
+import {
+  detailsLinkPropTypes,
+  detailsLinkDefaultProps,
+} from '../../other/sharedProps';
 
 class ExpandedStructuralSignificance extends Component {
-  state = {
-    structure: null,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      structure: null,
+    };
+
+    if (!window.customElements.get('protvista-structure')) {
+      window.customElements.define('protvista-structure', ProtvistaStructure);
+    }
+  }
 
   structureChange = ({ target }) => {
     this.setState({
@@ -24,6 +37,7 @@ class ExpandedStructuralSignificance extends Component {
       interactions,
       ligands,
       position,
+      accession,
     } = data;
 
     // Maps to hold key-value information
@@ -69,7 +83,6 @@ class ExpandedStructuralSignificance extends Component {
     }
 
     const currentStructureDetails = allStructures[currentStructure][0];
-    const imageUrl = `https://www.ebi.ac.uk/pdbe/static/entry/${currentStructure}_single_entity_${currentStructureDetails.entity_id}_image-200x200.png`;
 
     allLigands
       .forEach((ligand) => {
@@ -102,7 +115,7 @@ class ExpandedStructuralSignificance extends Component {
               return;
             }
 
-            related.structures.push(...interaction.structures);
+            relatedInteractions.structures.push(...interaction.structures);
           } else {
             if (!unrelatedInteractions[partnerAccessionUpppercased]) {
               unrelatedInteractions[partnerAccessionUpppercased] = interaction;
@@ -133,14 +146,20 @@ class ExpandedStructuralSignificance extends Component {
     return (
       <tr>
         <td colSpan="16">
-          <span className="expanded-section-title">Structural Significances</span>
+          <span className="expanded-section-title">Structural Impact</span>
           {detailsLink}
 
           <div className="significances-groups">
             <div className="column">
               <i className="icon icon-functional structural-icon" data-icon="4" />
-              <div><b>2D Image</b></div>
-              {(imageUrl) && <img src={imageUrl} alt="" />}
+              <div><b>3D Visualisation</b></div>
+              <protvista-structure
+                accession={accession}
+                molecule={currentStructure}
+                height="200px"
+                hide-viewport-controls
+                hide-table
+              />
 
               <StructuralPosition
                 proteinLength={proteinLength}
@@ -245,6 +264,7 @@ class ExpandedStructuralSignificance extends Component {
 
 ExpandedStructuralSignificance.propTypes = {
   data: PropTypes.shape({
+    accession: PropTypes.string,
     position: PropTypes.number,
     proteinLength: PropTypes.number,
     allStructures: PropTypes.objectOf(PropTypes.arrayOf(
@@ -291,11 +311,12 @@ ExpandedStructuralSignificance.propTypes = {
       position_code: PropTypes.string,
     })),
   }),
-  detailsLink: PropTypes.element.isRequired,
+  detailsLink: detailsLinkPropTypes,
 };
 
 ExpandedStructuralSignificance.defaultProps = {
   data: {},
+  detailsLink: detailsLinkDefaultProps,
 };
 
 export default ExpandedStructuralSignificance;

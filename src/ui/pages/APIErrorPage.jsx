@@ -7,12 +7,12 @@ const APIErrorContent = () => (
   <Fragment>
     <h3>Something went wrong...</h3>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-      nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-      fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-      culpa qui officia deserunt mollit anim id est laborum.
+      Unfortunately we weren&apos;t able to complete your request. We use various services
+      in the background to fulfil each request and sometimes failure of one of these
+      services can result in the complete failure of the service.
+    </p>
+    <p>
+      Please try again in a few minutes and get in touch with us if the issue persists.
     </p>
   </Fragment>
 );

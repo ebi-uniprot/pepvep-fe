@@ -2,16 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ColocatedVariantsBlock from './ColocatedVariantsBlock';
-import VariantIDsBlock from './VariantIDsBlock';
+import VariantDetailsBlock from './VariantDetailsBlock';
 import PublicationsList from '../other/PublicationsList';
+import {
+  detailsLinkPropTypes,
+  detailsLinkDefaultProps,
+  variationIDsPropTypes,
+  variationPropTypes,
+  variationDefaultProps,
+} from '../../other/sharedProps';
 
 const ExpandedClinicalSignificance = (props) => {
-  const { data, detailsLink } = props;
+  const { data, variation, detailsLink } = props;
 
   return (
     <tr>
       <td colSpan="16">
-        <span className="expanded-section-title">Clinical Significances</span>
+        <span className="expanded-section-title">Clinical Impact</span>
         {detailsLink}
 
         <div className="significances-groups">
@@ -89,7 +96,10 @@ const ExpandedClinicalSignificance = (props) => {
 
           <ColocatedVariantsBlock data={data} />
 
-          <VariantIDsBlock data={data.variationDetails.ids} />
+          <VariantDetailsBlock
+            data={data}
+            variation={variation}
+          />
         </div>
       </td>
     </tr>
@@ -120,20 +130,16 @@ ExpandedClinicalSignificance.propTypes = {
     categories: PropTypes.arrayOf(PropTypes.string),
     colocatedVariantsCount: PropTypes.number,
     diseaseColocatedVariantsCount: PropTypes.number,
-    variationDetails: PropTypes.shape({
-      ids: PropTypes.shape({
-        clinVarIDs: PropTypes.arrayOf(PropTypes.shape({})),
-        cosmicId: PropTypes.string,
-        dbSNPId: PropTypes.string,
-        rsId: PropTypes.string,
-      }),
-    }),
+    variationDetails: variationIDsPropTypes,
   }),
-  detailsLink: PropTypes.element.isRequired,
+  detailsLink: detailsLinkPropTypes,
+  variation: variationPropTypes,
 };
 
 ExpandedClinicalSignificance.defaultProps = {
   data: {},
+  detailsLink: detailsLinkDefaultProps,
+  variation: variationDefaultProps,
 };
 
 export default ExpandedClinicalSignificance;

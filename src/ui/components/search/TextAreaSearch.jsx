@@ -43,6 +43,8 @@ class TextAreaSearch extends Component {
       '3 165830358 165830358 T/C . . .',
       '21 43072000 43072000 T/C . . .',
       '21 43060540 43060540 C/T . . .',
+      '22 19479862 19479862 G/C . . .',
+      '22 19494512 19494512 C/G . . .',
 
       // '21 25891796 25891796 C/T',
       // '21 25891784 25891784 C/T',
@@ -85,6 +87,10 @@ class TextAreaSearch extends Component {
             <div>
               <span>Gene Symbol:</span>
               <span className="variant-example">TP53:p.Arg175His</span>
+            </div>
+            <div>
+              <span>dbSNP HGVS:</span>
+              <span className="variant-example">NM_145255.3:c.526C&gt;T</span>
             </div>
           </div>
 

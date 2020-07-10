@@ -23,7 +23,8 @@
     "react/button-has-type": false,
     "jsx-a11y/click-events-have-key-events": false,
     "jsx-a11y/interactive-supports-focus": false,
-    "react/no-find-dom-node": false
+    "react/no-find-dom-node": false,
+    "max-lines-per-function": 0
   },
   "globals": {
     "BASE_URL": "writable",

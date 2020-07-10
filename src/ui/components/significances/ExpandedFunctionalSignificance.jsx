@@ -4,33 +4,46 @@ import PropTypes from 'prop-types';
 
 import ColocatedDomainsAndSitesBlock from './ColocatedDomainsAndSitesBlock';
 import ColocatedVariantsBlock from './ColocatedVariantsBlock';
+import VariantDetailsBlock from './VariantDetailsBlock';
 import ColocatedPTMsBlock from './ColocatedPTMsBlock';
 import ColocatedMoleculeProcessing from './ColocatedMoleculeProcessing';
+import {
+  detailsLinkPropTypes,
+  detailsLinkDefaultProps,
+  variationPropTypes,
+  variationDefaultProps,
+} from '../../other/sharedProps';
 
-const ExpandedFunctionalSignificance = (props) => {
-  const { data, detailsLink } = props;
+const ExpandedFunctionalSignificance = ({
+  data,
+  variation,
+  detailsLink,
+}) => (
+  <tr>
+    <td colSpan="16">
+      <span className="expanded-section-title">Functional Protein Level Impact</span>
+      {detailsLink}
 
-  return (
-    <tr>
-      <td colSpan="16">
-        <span className="expanded-section-title">Functional Protein Level Impact</span>
-        {detailsLink}
+      <div className="significances-groups">
 
-        <div className="significances-groups">
+        <ColocatedDomainsAndSitesBlock data={data.features} />
 
-          <ColocatedDomainsAndSitesBlock data={data.features} />
-
+        <div className="significances-stacked-columns">
+          <VariantDetailsBlock
+            data={data}
+            variation={variation}
+          />
           <ColocatedVariantsBlock data={data} />
-
-          <ColocatedPTMsBlock data={data.features} />
-
-          <ColocatedMoleculeProcessing data={data.features} />
-
         </div>
-      </td>
-    </tr>
-  );
-};
+
+        <ColocatedPTMsBlock data={data.features} />
+
+        <ColocatedMoleculeProcessing data={data.features} />
+
+      </div>
+    </td>
+  </tr>
+);
 
 ExpandedFunctionalSignificance.propTypes = {
   data: PropTypes.shape({
@@ -44,11 +57,14 @@ ExpandedFunctionalSignificance.propTypes = {
       typeDescription: PropTypes.string,
     })),
   }),
-  detailsLink: PropTypes.element.isRequired,
+  detailsLink: detailsLinkPropTypes,
+  variation: variationPropTypes,
 };
 
 ExpandedFunctionalSignificance.defaultProps = {
   data: {},
+  detailsLink: detailsLinkDefaultProps,
+  variation: variationDefaultProps,
 };
 
 export default ExpandedFunctionalSignificance;

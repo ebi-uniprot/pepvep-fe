@@ -104,4 +104,12 @@
       background-color: darken(#794a4a, 10%);
     }
   }
+
+  &--toggle-isoforms {
+    margin: 0 0.5rem 0 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border-radius: 0.75rem;
+  }
 }

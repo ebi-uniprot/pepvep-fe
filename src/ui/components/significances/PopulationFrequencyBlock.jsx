@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v1 as uuidv1 } from 'uuid';
 
 import SignificancesColumn from './SignificancesColumn';
 import SignificanceDataLine from './SignificanceDataLine';
@@ -17,7 +18,7 @@ const PopulationFrequencyBlock = (props) => {
       .reduce((all, key) => {
         if (data.gnomAD[key].value) {
           all.push(
-            <li>
+            <li key={uuidv1()}>
               <span className="frequency-label">
                 {data.gnomAD[key].label}
                 :
@@ -34,7 +35,7 @@ const PopulationFrequencyBlock = (props) => {
       .reduce((all, key) => {
         if (data['1kg'][key].value) {
           all.push(
-            <li>
+            <li key={uuidv1()}>
               <span className="frequency-label">
                 {data['1kg'][key].label}
                 :
@@ -54,12 +55,12 @@ const PopulationFrequencyBlock = (props) => {
     >
       <SignificanceDataLine
         label="gnomAD"
-        value={<ul>{gnomAD}</ul>}
+        value={(gnomAD) ? <ul>{gnomAD}</ul> : <span>Not reported</span>}
       />
 
       <SignificanceDataLine
         label="1000 Genomes"
-        value={oneK}
+        value={(oneK && oneK.length > 0) ? <ul>{oneK}</ul> : <span>Not reported</span>}
       />
     </SignificancesColumn>
   );

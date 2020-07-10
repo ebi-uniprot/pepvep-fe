@@ -24,7 +24,7 @@ const PathogenicityBlock = (props) => {
 
       <SignificanceDataLine
         label="COSMIC"
-        value={(data.cosmicId) ? data.cosmicId : '-'}
+        value={(data.cosmicId) ? data.cosmicId : 'Not reported'}
       />
     </SignificancesColumn>
   );
